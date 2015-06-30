@@ -21,10 +21,10 @@ def installed() {
 
 def updated(settings) {
 	unschedule();
-	setupTimes();
+	scheduleTimes();
 }
 
-def setupTimes() {
+def scheduleTimes() {
 	log.debug "Scheduling times";
 	// Times are EST subtract 6
 
