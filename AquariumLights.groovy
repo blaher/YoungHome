@@ -9,7 +9,7 @@ definition(
 );
 
 preferences {
-	section("Select switch...") {
+	section("Select switch...") { // AquairumStrip
 		input name: "switch", type: "capability.switch", multiple: false
 	}
 }
@@ -72,7 +72,7 @@ def stopBrackish() {
 	strip.off3();
 }
 
-def stopUnused() {
+def stopUnused() { // Used for Refugium Pump during later process
 	log.debug "Turning off unused outlet";
 	strip.off4();
 }
