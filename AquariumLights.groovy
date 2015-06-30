@@ -1,11 +1,11 @@
 definition(
-    name: "Aquarium Lights Controller",
-    namespace: "younghome",
-    author: "Benjamin J. Young",
-    description: "Controls Aquarium Light Schedule",
-    category: "Pets",
-    iconUrl: "https://s3.amazonaws.com/smartapp-icons/Meta/light_outlet.png",
-    iconX2Url: "https://s3.amazonaws.com/smartapp-icons/Meta/light_outlet@2x.png"
+	name: "Aquarium Lights Controller",
+	namespace: "younghome",
+	author: "Benjamin J. Young",
+	description: "Controls Aquarium Light Schedule",
+	category: "Pets",
+	iconUrl: "https://s3.amazonaws.com/smartapp-icons/Meta/light_outlet.png",
+	iconX2Url: "https://s3.amazonaws.com/smartapp-icons/Meta/light_outlet@2x.png"
 );
 
 preferences {
@@ -16,17 +16,17 @@ preferences {
 
 def installed() {
 	log.debug "Installed with settings: ${settings}";
-    setupTimes();
+	setupTimes();
 }
 
 def updated(settings) {
 	unschedule();
-    setupTimes();
+	setupTimes();
 }
 
 def setupTimes() {
 	log.debug "Scheduling times";
-    // Times are EST subtract 6
+	// Times are EST subtract 6
 
 	schedule("0 0 0 * * ?", startDisplay);
 	schedule("0 0 5 * 2-6 ?", stopDisplay);
@@ -39,7 +39,7 @@ def setupTimes() {
 	schedule("0 0 0 * * ?", startBrackish);
 	schedule("0 0 16 * * ?", stopBrackish);
     
-    schedule("0 0 0 * * ?", stopUnused);
+	schedule("0 0 0 * * ?", stopUnused);
 }
 
 def startDisplay() {
