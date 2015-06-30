@@ -8,12 +8,22 @@ Will also include any additional resources (e.g. images) or APIs to control serv
 * Smartthings & Groovy Documentation: http://docs.smartthings.com/en/latest/index.html
 
 ## Devices
-* Hub - Smartthings 1.0 Hub
-* Mixing Pump - Aeon Labs Smart Energy Switch
-* Aqurium Lights - Aeon Labs Smart Energy Power Strip
-* BenGPS - Virtual Switch
-* MarcusGPS - Virtual Switch
+* HomeHub - Smartthings Hub 2.0
+* OfficeHub - Smartthings Hub 1.0
+* AquairumSwitch - Aeon Labs Smart Energy Switch Gen 4
+* AquairumStrip - Aeon Labs Smart Energy Power Strip Gen 4
+* BedroomSensor - Aeon Labs MultiSensor Gen 4
+* BedroomSwitch - Linear Wall Switch
+* BedroomBulb1 - Aeon Labs LED Lightbulb Gen 5
+* BedroomBulb2 - Aeon Labs LED Lightbulb Gen 5
+* BenHomeGPS - Virtual Switch
+* BenOfficeGPS - Virtual Switch
+* MarcusHomeGPS - Virtual Switch
 
 ## IFTTT Recipes
-* If You enter an area, then Switch on BenGPS 
-* If You exit an area, then switch off BenGPS
+* If Ben enters home area, then Switch on BenHomeGPS 
+* If Ben exits home area, then switch off BenHomeGPS
+* If Marcus enters home area, then Switch on MarcusHomeGPS 
+* If Marcus exits home area, then switch off MarcusHomeGPS
+* If Ben enters office area, then Switch on BenOfficeGPS 
+* If Ben exits office area, then switch off BenOfficeGPS
