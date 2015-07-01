@@ -10,34 +10,34 @@ definition(
 
 preferences {
 	section("Select switch...") { // AquairumStrip
-		input name: "switch", type: "capability.switch", multiple: false
+		input name: "strip", type: "capability.switch", multiple: false
 	}
 }
 
 def installed() {
 	log.debug "Installed with settings: ${settings}";
-	setupTimes();
+	scheduleTimes();
 }
 
 def updated(settings) {
+	log.debug "Updated with settings: ${settings}";
 	unschedule();
 	scheduleTimes();
 }
 
 def scheduleTimes() {
 	log.debug "Scheduling times";
-	// Times are EST subtract 6
 
-	schedule("0 0 0 * * ?", startDisplay);
-	schedule("0 0 5 * 2-6 ?", stopDisplay);
-	schedule("0 0 8 * 2-6 ?", startDisplay);
-	schedule("0 0 16 * * ?", stopDisplay);
+	schedule("0 0 6 * * ?", startDisplay);
+	schedule("0 0 11 * 2-6 ?", stopDisplay);
+	schedule("0 0 14 * 2-6 ?", startDisplay);
+	schedule("0 0 22 * * ?", stopDisplay);
 
-	schedule("0 0 11 * * ?", startRefugium);
-	schedule("0 0 2 * 2-6 ?", stopRefugium);
+	schedule("0 0 17 * * ?", startRefugium);
+	schedule("0 0 8 * 2-6 ?", stopRefugium);
     
-	schedule("0 0 0 * * ?", startBrackish);
-	schedule("0 0 16 * * ?", stopBrackish);
+	schedule("0 0 6 * * ?", startBrackish);
+	schedule("0 0 22 * * ?", stopBrackish);
     
 	schedule("0 0 0 * * ?", stopUnused);
 }
