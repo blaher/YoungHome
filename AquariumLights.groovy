@@ -20,7 +20,6 @@ def installed() {
 }
 
 def updated(settings) {
-	log.debug "Updated with settings: ${settings}";
 	unschedule();
 	scheduleTimes();
 }
@@ -36,8 +35,8 @@ def scheduleTimes() {
 	schedule("0 0 17 * * ?", startRefugium);
 	schedule("0 0 8 * 2-6 ?", stopRefugium);
     
-	schedule("0 0 6 * * ?", startBrackish);
-	schedule("0 0 22 * * ?", stopBrackish);
+	schedule("0 59 5 * * ?", startBrackish);
+	schedule("0 59 21 * * ?", stopBrackish);
     
 	schedule("0 0 0 * * ?", stopUnused);
 }
