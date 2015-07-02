@@ -26,8 +26,8 @@ def updated(settings) {
 
 def scheduleTimes() {
 	log.debug "Scheduling times";
-	// Time is EST minus 6
-	schedule("0 0 6 * * ?", checkBatteries);
+	
+	schedule("0 4 6 * * ?", checkBatteries);
 }
 
 def checkBatteries() {
