@@ -36,7 +36,7 @@ def scheduleTimes() {
 	schedule("0 0 8 * 2-6 ?", stopRefugium);
     
 	schedule("0 59 5 * * ?", startBrackish);
-	schedule("0 59 21 * * ?", stopBrackish);
+	schedule("0 1 22 * * ?", stopBrackish);
     
 	schedule("0 0 0 * * ?", stopUnused);
 }
