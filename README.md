@@ -12,12 +12,12 @@ Will also include any additional resources (e.g. images) or APIs to control serv
 * OfficeHub - Smartthings Hub 1.0
 * AquariumFWStrip - Aeon SmartStrip
 * AquariumSWStrip - Aeon SmartStrip
-* BedroomBulb1 - Aeon RGB+W Bulb
-* BedroomBulb2 - Aeon RGB+W Bulb
+* BedroomBulb1 - Aeon Bulb
+* BedroomBulb2 - Aeon Bulb
 * BedroomMultisensor - Aeon Multisensor
 * GPSAndrea - Virtual Switch
-* GPSBen Home - Virtual Switch
-* GPSBen Office - Virtual Switch
+* GPSBenHome - Virtual Switch
+* GPSBenOffice - Virtual Switch
 * GPSButler - Virtual Switch
 * GPSChef - Virtual Switch
 * GPSDriver - Virtual Switch
@@ -30,11 +30,15 @@ Will also include any additional resources (e.g. images) or APIs to control serv
 * MixingWaterPump - Z-Wave Metering Switch
 
 ## IFTTT Recipes
-* If Ben enters home area, then Switch on BenHomeGPS 
-* If Ben exits home area, then switch off BenHomeGPS
-* If Ben connects to YoungNetwork, then Switch on BenHomeGPS 
-* If Ben disconnects from YoungNetwork, then switch off BenHomeGPS
-* If Marcus enters home area, then Switch on MarcusHomeGPS 
-* If Marcus exits home area, then switch off MarcusHomeGPS
-* If Ben enters office area, then Switch on BenOfficeGPS 
-* If Ben exits office area, then switch off BenOfficeGPS
+* If Ben enters home area, then Switch on GPSBenHome 
+* If Ben exits home area, then switch off GPSBenHome
+* If Ben connects to YoungNetwork, then Switch on GPSBenHome 
+* If Ben disconnects from YoungNetwork, then switch off GPSBenHome
+* If Marcus enters home area, then Switch on GPSMarcus 
+* If Marcus exits home area, then switch off GPSMarcus
+* If Marcus connects to YoungNetwork, then Switch on GPSMarcus 
+* If Marcus disconnects from YoungNetwork, then switch off GPSMarcus
+* If Ben enters office area, then Switch on GPSBenOffice 
+* If Ben exits office area, then switch off GPSBenOffice
+* If Ben connects to Work's Network, then Switch on GPSBenOffice 
+* If Ben disconnects from Work's Network, then switch off GPSBenOffice
