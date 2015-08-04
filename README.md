@@ -10,19 +10,30 @@ Will also include any additional resources (e.g. images) or APIs to control serv
 ## Devices
 * HomeHub - Smartthings Hub 2.0
 * OfficeHub - Smartthings Hub 1.0
-* AquairumSwitch - Aeon Labs Smart Energy Switch Gen 4
-* AquairumStrip - Aeon Labs Smart Energy Power Strip Gen 4
-* BedroomSensor - Aeon Labs MultiSensor Gen 4
-* BedroomSwitch - Linear Wall Switch
-* BedroomBulb1 - Aeon Labs LED Lightbulb Gen 5
-* BedroomBulb2 - Aeon Labs LED Lightbulb Gen 5
-* BenHomeGPS - Virtual Switch
-* BenOfficeGPS - Virtual Switch
-* MarcusHomeGPS - Virtual Switch
+* AquariumFWStrip - Aeon SmartStrip
+* AquariumSWStrip - Aeon SmartStrip
+* BedroomBulb1 - Aeon RGB+W Bulb
+* BedroomBulb2 - Aeon RGB+W Bulb
+* BedroomMultisensor - Aeon Multisensor
+* GPSAndrea - Virtual Switch
+* GPSBen Home - Virtual Switch
+* GPSBen Office - Virtual Switch
+* GPSButler - Virtual Switch
+* GPSChef - Virtual Switch
+* GPSDriver - Virtual Switch
+* GPSGardener - Virtual Switch
+* GPSGuard - Virtual Switch
+* GPSIzzy - Virtual Switch
+* GPSMaid - Virtual Switch
+* GPSMarcus - Virtual Switch
+* GPSTrainer - Virtual Switch
+* MixingWaterPump - Z-Wave Metering Switch
 
 ## IFTTT Recipes
 * If Ben enters home area, then Switch on BenHomeGPS 
 * If Ben exits home area, then switch off BenHomeGPS
+* If Ben connects to YoungNetwork, then Switch on BenHomeGPS 
+* If Ben disconnects from YoungNetwork, then switch off BenHomeGPS
 * If Marcus enters home area, then Switch on MarcusHomeGPS 
 * If Marcus exits home area, then switch off MarcusHomeGPS
 * If Ben enters office area, then Switch on BenOfficeGPS 
