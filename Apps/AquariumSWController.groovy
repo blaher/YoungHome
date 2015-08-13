@@ -73,7 +73,7 @@ def stopBackLight() {
 }
 
 def startUsed() { // Used for other outlets for later use
-	log.debug('Turning on used outlet');
+	log.debug('Turning on used outlets');
 	strip.on3();
 	strip.on4();
 }
