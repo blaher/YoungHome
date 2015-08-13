@@ -17,14 +17,14 @@ preferences {
 def installed() {
 	log.debug('Installed with settings: ${settings}');
 	scheduleTimes();
-    startUsed();
+	startUsed();
 }
 
 def updated(settings) {
 	log.debug('Application updated');
 	unschedule();
 	scheduleTimes();
-    startUsed();
+	startUsed();
 }
 
 def scheduleTimes() {
@@ -36,88 +36,88 @@ def scheduleTimes() {
 def checkTime() {
 	def calendar = Calendar.getInstance();
 	def day = calendar.get(Calendar.DAY_OF_WEEK);
-    def hour = (new Date(now())).format('HH', location.timeZone);
-    
-    switch (hour) {
-    	case 0:
-            stopFrontLight();
-            stopBackLight();
-            startUsed();
-        break;
-    	case 6:
-        	switch (day){
-            	case Calendar.MONDAY:
-                case Calendar.TUESDAY:
-                case Calendar.WEDNESDAY:
-                case Calendar.THURSDAY:
-                case Calendar.FRIDAY:
-                	startBackLight();
-        		break;
-            }
-        break;
-        case 10:
-        	switch (day){
-            	case Calendar.MONDAY:
-                case Calendar.TUESDAY:
-                case Calendar.WEDNESDAY:
-                case Calendar.THURSDAY:
-                case Calendar.FRIDAY:
-                	stopBackLight();
-        		break;
-                case Calendar.SATURDAY:
-                case Calendar.SUNDAY:
-                	startBackLight();
-                break;
-            }
-        break;
-        case 15:
+	def hour = (new Date(now())).format('HH', location.timeZone);
+	
+	switch (hour) {
+		case 0:
+			stopFrontLight();
+			stopBackLight();
+			startUsed();
+		break;
+		case 6:
 			switch (day){
-                case Calendar.SUNDAY:
-                	startFrontLight();
-                break;
-            }
-        break;
-        case 16:
-        	startFrontLight();
-            startBackLight();
-        break;
-        case 17:
-        	switch (day){
-                case Calendar.SUNDAY:
-                	stopBackLight();
-                break;
-            }
-        break;
-        case 18:
-        	switch (day){
-            	case Calendar.MONDAY:
-                case Calendar.TUESDAY:
-                case Calendar.WEDNESDAY:
-                case Calendar.THURSDAY:
-                case Calendar.SATURDAY:
-                	stopBackLight();
-                break;
-            }
-        break;
-        case 20:
-        	switch (day){
-                case Calendar.FRIDAY:
-                	stopBackLight();
-                break;
-            }
-        break;
-        case 22:
-        	switch (day){
-            	case Calendar.MONDAY:
-                case Calendar.TUESDAY:
-                case Calendar.WEDNESDAY:
-                case Calendar.THURSDAY:
-                case Calendar.SUNDAY:
-                	stopFrontLight();
-                break;
-            }
-        break;
-    }
+				case Calendar.MONDAY:
+				case Calendar.TUESDAY:
+				case Calendar.WEDNESDAY:
+				case Calendar.THURSDAY:
+				case Calendar.FRIDAY:
+					startBackLight();
+				break;
+			}
+		break;
+		case 10:
+			switch (day){
+				case Calendar.MONDAY:
+				case Calendar.TUESDAY:
+				case Calendar.WEDNESDAY:
+				case Calendar.THURSDAY:
+				case Calendar.FRIDAY:
+					stopBackLight();
+				break;
+				case Calendar.SATURDAY:
+				case Calendar.SUNDAY:
+					startBackLight();
+				break;
+			}
+		break;
+		case 15:
+			switch (day){
+				case Calendar.SUNDAY:
+					startFrontLight();
+				break;
+			}
+		break;
+		case 16:
+			startFrontLight();
+			startBackLight();
+		break;
+		case 17:
+			switch (day){
+				case Calendar.SUNDAY:
+					stopBackLight();
+				break;
+			}
+		break;
+		case 18:
+			switch (day){
+				case Calendar.MONDAY:
+				case Calendar.TUESDAY:
+				case Calendar.WEDNESDAY:
+				case Calendar.THURSDAY:
+				case Calendar.SATURDAY:
+					stopBackLight();
+				break;
+			}
+		break;
+		case 20:
+			switch (day){
+				case Calendar.FRIDAY:
+					stopBackLight();
+				break;
+			}
+		break;
+		case 22:
+			switch (day){
+				case Calendar.MONDAY:
+				case Calendar.TUESDAY:
+				case Calendar.WEDNESDAY:
+				case Calendar.THURSDAY:
+				case Calendar.SUNDAY:
+					stopFrontLight();
+				break;
+			}
+		break;
+	}
 }
 
 def startFrontLight() {
@@ -128,7 +128,7 @@ def startFrontLight() {
 def stopFrontLight() {
 	log.debug('Turning off front light');
 	strip.off1();
-    startUsed();
+	startUsed();
 }
 
 def startBackLight() {
@@ -139,7 +139,7 @@ def startBackLight() {
 def stopBackLight() {
 	log.debug('Turning off back light');
 	strip.off2();
-    startUsed();
+	startUsed();
 }
 
 def startUsed() { // Used for other outlets for later use
