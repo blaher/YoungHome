@@ -2,10 +2,10 @@ definition(
 	name: "Bedroom Lights Controller",
 	namespace: "younghome",
 	author: "Benjamin J. Young",
-	description: "Controls Aquarium Light Schedule",
+	description: "Controls Bedroom Lights",
 	category: "Convenience",
-	iconUrl: "https://s3.amazonaws.com/smartapp-icons/Meta/light_outlet.png",
-	iconX2Url: "https://s3.amazonaws.com/smartapp-icons/Meta/light_outlet@2x.png"
+	iconUrl: "https://s3.amazonaws.com/smartapp-icons/Convenience/smartlights.png",
+	iconX2Url: "https://s3.amazonaws.com/smartapp-icons/Convenience/smartlights@2x.png"
 );
 
 preferences {
@@ -61,14 +61,15 @@ def subscribes() {
 
 	subscribe(location, 'mode', checkMode);
     subscribe(motion, 'motion', checkMotion);
+    subscribe(lights, 'setLevel', checkLevel);
     subscribe(illuminance, 'illuminance', checkIlluminance);
 }
 
 def schedules() {
 	log.debug('Scheduling events');
 
-    schedule('0 0 6,18 * * ?', lightLow);
-    schedule('0 0 10 * * ?', lightFull);
+    schedule('0 0 5,17 * * ?', lightLow);
+    schedule('0 0 8 * * ?', lightFull);
     
     schedule('0 0 20 * * ?', startDim);
     
@@ -91,6 +92,9 @@ def checkMode(evt) {
 	} else if (state.currentMode == away_mode) {
     	log.debug('You left the house');
 		lightsOff();
+	} else if (state.currentMode == awake_mode && state.previousMode == away_mode) {
+    	log.debug('You came home');
+		lightsOn();
 	}
 }
 
@@ -103,7 +107,8 @@ def checkMotion(evt) {
     	lightsOn();
     } else if(evt.value == 'inactive' && state.currentMode == awake_mode) {
 		log.debug('No more movement');
-    	runIn(60*5, recheckMotion);
+        unschedule(recheckMotion);
+    	runIn(60*15, recheckMotion);
     }
 }
 
@@ -116,57 +121,74 @@ def recheckMotion(evt) {
     }
 }
 
+def checkLevel(evt) {
+	log.debug('Checking level');
+    
+	lightLevel(evt.value, false);
+}
+
 def checkIlluminance(evt) {
 	log.debug('Checking Illuminance');
 
-	log.debug("Light level before: ${state.lightLevel}");
-    if (evt.integerValue <= 100) {
-    	log.debug('Way too dark');
-    	state.lightLevel = 100;
-	} else if (evt.integerValue < state.lightMin && state.lightLevel < 100) {
-    	log.debug('Too dark');
-    	state.lightLevel = state.lightLevel + 5;
-    } else if (evt.integerValue > state.lightMax && state.lightLevel > 0) {
-    	log.debug('Too Bright');
-    	state.lightLevel = state.lightLevel - 5;
+	if (state.lightAuto == true) {
+        log.debug("Light level before: ${state.lightLevel}");
+        if (evt.integerValue <= 100) {
+            log.debug('Way too dark');
+            state.lightLevel = 100;
+        } else if (evt.integerValue < state.lightMin && state.lightLevel < 100) {
+            log.debug('Too dark');
+            state.lightLevel = state.lightLevel + 5;
+        } else if (evt.integerValue > state.lightMax && state.lightLevel > 0) {
+            log.debug('Too Bright');
+            state.lightLevel = state.lightLevel - 5;
+        }
+        log.debug("Light level after: ${state.lightLevel}");
+        
+        lightLevel(state.lightLevel, true);
     }
-    log.debug("Light level after: ${state.lightLevel}");
-    
-    lightLevel(state.lightLevel, true);
 }
 
 def lightTemperature(value) {
 	log.debug("Changing light temperature to ${value}");
 
 	state.lightTemperature = value;
+    
+    if (value == "warm") {
+    	lights.setColorTemperature(100);
+    } else {
+    	lights.setColorTemperature(0);
+    }
 }
 
 def startDim() {
 	log.debug('Starting night time dim schedule');
 
 	lightLevel(100, false);
-    runIn(60*5, dim);
+    runIn(60*1, dim);
 }
 
 def dim() {
 	log.debug('Dimming');
 
 	log.debug("Light level before: ${state.lightLevel}");
-	state.lightLevel = state.lightLevel - 3;
+	state.lightLevel = state.lightLevel - 1;
     log.debug("Light level after: ${state.lightLevel}");
     
-    if (state.lightLevel < 30) {
-    	log.debug('Time is now 10pm');
+    if (state.lightLevel <= 10) {
+    	log.debug('Lowest light level reached');
     	stopDim();
     } else {
     	lightLevel(state.lightLevel, false);
+        unschedule(dim);
+        runIn(60*1, dim);
     }
 }
 
 def stopDim() {
 	log.debug('Stopping night time dim schedule');
 
-	lightLevel(20, false);
+	unschedule(dim);
+	lightLevel(10, false);
     
     state.lightAuto = true;
     log.debug('Now allowing lux sensor to change light');
@@ -212,6 +234,10 @@ def lightLow() {
 	lightTemperature('warm');    
     state.lightMin = 300;
     state.lightMax = 400;
+    
+    if (state.lightLevel < 50) {
+    	lightLevel(50);
+    }
 }
 
 def lightFull() {
@@ -220,4 +246,8 @@ def lightFull() {
 	lightTemperature('cool');    
     state.lightMin = 400;
     state.lightMax = 500;
+    
+    if (state.lightLevel > 50) {
+    	lightLevel(50);
+    }
 }
